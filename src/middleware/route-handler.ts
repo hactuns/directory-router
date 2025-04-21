@@ -1,5 +1,3 @@
-import "dotenv/config";
-
 import { extname, join, resolve } from "path";
 import { pathToFileURL } from "url";
 import { existsSync } from "fs";

@@ -1,5 +1,19 @@
 .npmrc
+
+# Ignore build and node_modules folders
+node_modules/
 !build/
 !bin/
+
+# Ignore config files for dev tools
+*.log
+*.tsbuildinfo
+tsconfig.json
+.eslintrc
+.eslintrc.js
+.prettierrc
+.gitignore
+.npmrc
+
+# Ignore env files
 .env
-node_modules

@@ -1,7 +1,7 @@
 export interface AppConfig {
-  provider: string;
-  rootDir: string;
-  buildOutDir: string;
+  engine: string;
+  root: string;
+  outDir: string;
 }
 
 export interface Program {

@@ -1,5 +1,5 @@
 {
-  "provider": "koa",
-  "rootDir": "src",
-  "buildOutDir": ".dr"
+  "engine": "koa",
+  "root": "src",
+  "outDir": ".dr"
 }

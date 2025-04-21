@@ -1,10 +1,12 @@
+import "dotenv/config";
+
 import { serve } from "@hono/node-server";
 import { isClass } from "./utils/general";
 import { routeHandler } from "./middleware/route-handler";
 import { AppConfig } from "./type";
 import { withConfig } from "./middleware/command-config";
 
-export async function getServer(provider: string, port: number) {
+export async function getServer(engine: string, port: number) {
   const providerMapper: Record<string, string> = {
     express: "default",
     koa: "default",
@@ -12,12 +14,12 @@ export async function getServer(provider: string, port: number) {
     default: "default",
   };
 
-  const Provider = (await import(provider))?.[
-    providerMapper[provider] || "default"
+  const Provider = (await import(engine))?.[
+    providerMapper[engine] || "default"
   ];
 
   if (isClass(Provider)) {
-    if (provider === "hono") {
+    if (engine === "hono") {
       const app = new Provider();
 
       serve({
@@ -36,11 +38,11 @@ export async function getServer(provider: string, port: number) {
 
 export async function startServer(config: AppConfig) {
   try {
-    const provider = config.provider.toLowerCase();
+    const engine = config.engine.toLowerCase();
 
     const port = Number(process.env.PORT || 3000);
 
-    const app = await getServer(provider, port);
+    const app = await getServer(engine, port);
 
     app.use(routeHandler(config));
 

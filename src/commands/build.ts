@@ -5,9 +5,9 @@ import { copyEntryServer } from "../utils/server";
 
 export async function drBuild(config: AppConfig, watch?: boolean) {
   try {
-    const { rootDir, buildOutDir } = config;
+    const { root, outDir } = config;
 
-    await build(getBuildConfig(rootDir, buildOutDir));
+    await build(getBuildConfig(root, outDir));
     await copyEntryServer(config);
 
     console.log("Build success at", new Date());
