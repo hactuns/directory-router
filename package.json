@@ -1,9 +1,26 @@
 {
   "name": "directory-router",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Custom CLI to generate file-based APIs with dynamic routing",
   "bin": {
     "dr": "bin/cli.js"
+  },
+  "keywords": [
+    "koa",
+    "hono",
+    "express",
+    "app-router",
+    "page-router",
+    "directory-router"
+  ],
+  "homepage": "https://github.com/hactuns/directory-router",
+  "bugs": {
+    "url": "https://github.com/hactuns/directory-router/issues"
+  },
+  "author": "Hactuns<khactuans.tran@gmail.com>(https://hactun.vercel.app)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hactuns/directory-router.git"
   },
   "scripts": {
     "dr": "tsx watch -r dotenv/config src/cli.ts",
