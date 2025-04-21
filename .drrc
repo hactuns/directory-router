@@ -1,0 +1,5 @@
+{
+  "provider": "koa",
+  "rootDir": "src",
+  "buildOutDir": ".dr"
+}

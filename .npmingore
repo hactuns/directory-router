@@ -1,0 +1,5 @@
+.npmrc
+!build/
+!bin/
+.env
+node_modules
