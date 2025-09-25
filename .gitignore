@@ -52,3 +52,4 @@ next-env.d.ts
 ./bin
 ./node_modules
 .npmrc
+**/api/**

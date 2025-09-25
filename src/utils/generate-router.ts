@@ -1,8 +1,5 @@
-import { context } from 'esbuild';
-import { AppConfig } from '../type';
 import fg from 'fast-glob';
 import path from 'path';
-import { mkdirSync } from 'fs';
 
 function filePathToRoute(file: string, root: string): string {
   const rel = path.relative(root, file);
@@ -23,13 +20,9 @@ export async function generateRouteMapFile(root: string) {
 
   const routeHandlers: Record<string, object> = {};
 
-  const exporter: string[] = [];
-
   await Promise.all(
     files.map(async (file) => {
       const apiPath = filePathToRoute(file, root);
-
-      exporter.push(`'${apiPath}': import('${file}')`);
       routeHandlers[apiPath] = await import(file);
 
       Object.keys(routeHandlers[apiPath]).forEach((key) => {
@@ -40,31 +33,5 @@ export async function generateRouteMapFile(root: string) {
     })
   );
 
-  return `export const routes = {${exporter.join(',')}}`;
-}
-
-export async function drDev(config: AppConfig) {
-  const { root, outDir } = config;
-
-  const contents = await generateRouteMapFile(root);
-
-  mkdirSync(outDir, { recursive: true });
-  const ctx = await context({
-    stdin: {
-      contents,
-      resolveDir: process.cwd(),
-      loader: 'ts',
-    },
-    outfile: path.resolve(outDir, 'route.js'),
-    bundle: true,
-    platform: 'node',
-    target: 'node18',
-    minify: false,
-    outbase: root,
-    format: 'cjs',
-    keepNames: true,
-    treeShaking: false,
-  });
-
-  await ctx.watch();
+  return routeHandlers;
 }

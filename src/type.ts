@@ -1,5 +1,4 @@
 export interface AppConfig {
-  engine: string;
   root: string;
   outDir: string;
 }

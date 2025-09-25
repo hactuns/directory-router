@@ -1,5 +1,4 @@
 {
-  "engine": "koa",
   "root": "src",
   "outDir": ".dr"
 }

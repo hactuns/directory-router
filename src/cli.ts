@@ -1,32 +1,30 @@
-import sade from "sade";
-import { drBuild, drDev, drStart } from "./commands";
-import { withConfig } from "./middleware/command-config";
-import { Program } from "./type";
+import sade from 'sade';
+import { drBuild, drDev, drStart } from './commands';
+import { withConfig } from './middleware/command-config';
+import { Program } from './type';
 
-const prog = sade("dr");
+const prog = sade('dr');
 
-const actions: Program[] = [
+(<Program[]>[
   {
-    command: "dev",
-    description: "Run the development environment",
-    example: "dr dev",
+    command: 'dev',
+    description: 'Run the development environment',
+    example: 'dr dev',
     action: drDev,
   },
   {
-    command: "build",
-    description: "Build the source directory",
-    example: "dr build",
+    command: 'build',
+    description: 'Build the source directory',
+    example: 'dr build',
     action: drBuild,
   },
   {
-    command: "start",
-    description: "Start the application",
-    example: "dr start",
+    command: 'start',
+    description: 'Start the application',
+    example: 'dr start',
     action: drStart,
   },
-];
-
-actions.map((act) =>
+]).forEach((act) =>
   prog
     .command(act.command)
     .describe(act.description)
@@ -34,4 +32,11 @@ actions.map((act) =>
     .action(withConfig(act.action))
 );
 
-prog.parse(process.argv);
+(() => {
+  try {
+    prog.parse(process.argv);
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
+})();

@@ -6,9 +6,6 @@
     "dr": "bin/cli.js"
   },
   "keywords": [
-    "koa",
-    "hono",
-    "express",
     "app-router",
     "page-router",
     "directory-router"
@@ -29,18 +26,16 @@
     "postbuild": "chmod +x bin/cli.js && yarn link || true"
   },
   "devDependencies": {
-    "@hono/node-server": "^1.14.1",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
     "@typescript-eslint/parser": "^5.55.0",
     "dotenv": "^16.5.0",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-unused-imports": "^4.1.4",
-    "express": "^5.1.0",
     "glob": "7",
-    "hono": "^4.7.7",
-    "koa": "^2.16.1",
+    "prettier": "^3.6.2",
     "sade": "^1.8.1",
     "tsx": "^4.19.3",
     "typescript": "^5.8.3"
@@ -53,8 +48,8 @@
   "license": "MIT",
   "dependencies": {
     "@types/express": "^5.0.1",
-    "@types/koa": "^2.15.0",
     "@types/node": "^22.14.1",
-    "esbuild": "^0.25.2"
+    "esbuild": "^0.25.2",
+    "fast-glob": "^3.3.3"
   }
 }

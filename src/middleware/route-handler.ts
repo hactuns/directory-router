@@ -1,12 +1,12 @@
-import { extname, join, resolve } from "path";
-import { pathToFileURL } from "url";
-import { existsSync } from "fs";
-import { AppConfig } from "../type";
+import { extname, join } from 'path';
+import { pathToFileURL } from 'url';
+import { existsSync } from 'fs';
+import { AppConfig } from '../type';
 
 function resolveHandlerPath(p: string): string {
   if (extname(p)) return p;
 
-  if (existsSync(p + ".js")) return p + ".js";
+  if (existsSync(p + '.js')) return p + '.js';
 
   return p;
 }
@@ -22,19 +22,23 @@ export function routeHandler(_: AppConfig) {
     console.log(`${method} - ${url} - ${resolveHandlerPath(handlerPath)}`);
 
     if (!handlerPath) {
-      throw new Error("Route Not Found");
+      throw new Error('Route Not Found');
     }
 
-    const handlerModule = await import(
-      pathToFileURL(resolveHandlerPath(handlerPath)).href
-    );
+    const handlerModule = await import(pathToFileURL(resolveHandlerPath(handlerPath)).href);
 
     const handler = handlerModule[method];
 
     if (!handler) {
-      throw new Error("Method Not Available");
+      throw new Error('Method Not Available');
     }
 
     handler(...args);
   };
+}
+
+export class RouterApplication {
+  static loadRoute() {
+    //
+  }
 }
