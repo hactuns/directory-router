@@ -3,7 +3,7 @@
   "version": "0.2.4",
   "description": "Custom CLI to generate file-based APIs with dynamic routing",
   "bin": {
-    "dr": "bin/cli.js"
+    "dr": "./bin/cli.js"
   },
   "keywords": [
     "app-router",
@@ -22,8 +22,10 @@
   "scripts": {
     "dr": "tsx watch -r dotenv/config src/cli.ts",
     "prebuild": "yarn unlink || true",
-    "build": "esbuild src/cli.ts src/server.ts --external:esbuild --format=cjs --bundle --platform=node --target=node18 --outdir=bin --minify --tsconfig=tsconfig.json --banner:js='#!/usr/bin/env node'",
-    "postbuild": "chmod +x bin/cli.js && yarn link || true"
+    "build": "tsx cli.build.ts",
+    "postbuild": "chmod +x ./bin/cli.js && yarn link || true",
+    "prepack": "rm -rf .pack && mkdir -p .pack",
+    "pack:local": "mkdir -p .pack && yarn pack --filename .pack/dr-$(date +%m.%d.%H%M).tgz && echo \"📦 Packed at: $(pwd)/.pack/$(ls -t .pack | head -n1)\""
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.55.0",

@@ -4,17 +4,17 @@ import { createServer } from 'http';
 
 export async function startServer(config: AppConfig) {
   try {
-    const port = Number(process.env.PORT || 3000);
+    const port = +(process.env.PORT || 3000);
 
     const server = createServer((req, res) => {
-      //
+      console.log(req);
     });
 
     server.listen(port, () => {
-      console.log(`> Application running on port ${process.env.PORT}`, config);
+      console.log(`> Application running on port ${port}`);
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 
